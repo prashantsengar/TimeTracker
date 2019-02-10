@@ -5,6 +5,13 @@ import atexit
 
 dic= {}
 
+recording=True
+
+def stop():
+    global recording
+    recording=False
+    save()
+
 def save():
     data = json.dumps(dic)
     file = open('data.json','w+')
@@ -21,27 +28,7 @@ def add(name, time):
     else:
         dic[name]=time
 
-def startRecording():
-    currentApp=''
 
-
-    _count=0    
-    while True:
-        newApp = win32gui.GetWindowText(win32gui.GetForegroundWindow())
-        print(newApp)
-        if newApp==currentApp:
-            for i in range(3):
-                time.sleep(1)
-            _count+=3
-            print(f'In if: {_count}')
-        else:
-            add(currentApp, _count)
-            currentApp=newApp
-            _count=0
-            for i in range(3):
-                time.sleep(1)
-            _count+=3
-            print(f'In else: {_count}')
             
 
 if __name__=='__main__':
