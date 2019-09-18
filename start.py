@@ -47,9 +47,15 @@ def startRecording():
 
     root.after(1000, startRecording)
 
+def stop_recording():
+    timetracker.stop()
+    start['state']='normal'
+    stop['state']='disabled'
+
 def startEv(btn):
-    
     stop.pack(side='left')
+    start['state']='disabled'
+    stop['state']='normal'
     startRecording()
     #timetracker.startRecording()
 
@@ -58,7 +64,7 @@ frame.pack()
 
 start = tk.Button(frame, text="START", command=lambda:startEv(start))
 start.pack(side='left')
-stop = tk.Button(frame, text='STOP', command=lambda:timetracker.stop())
+stop = tk.Button(frame, text='STOP', command=lambda:stop_recording())
 report = tk.Button(frame, text='Report', command=lambda:createReport())
 report.pack(side='right')
 
