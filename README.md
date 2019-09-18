@@ -6,5 +6,5 @@ git clone https://github.com/prashantsengar/TimeTracker
 
 ## Start the program
 - Open Command Prompt
-- python timetracker.py
+- python start.py
 - Start your work
