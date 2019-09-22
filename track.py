@@ -1,9 +1,7 @@
-##import threading
-##import timetracker
 import tkinter as tk
 import win32gui
-import psutil, win32process
-import os
+import psutil 
+import win32process
 import matplotlib.pyplot as plotter
 from pathlib import Path
 import json
@@ -19,7 +17,8 @@ class TrackTime:
         self.titles = DEF['titles'].split(',')
         self.ignore_processes = DEF['ignore'].split(',')
         
-        self.root = tk.Tk('TimeTracker')
+        self.root = tk.Tk()
+        self.root.title('TimeTracker')
         self.frame = tk.Frame(self.root)
         self.frame.pack()
         self.start_btn = tk.Button(self.frame, text="START",
