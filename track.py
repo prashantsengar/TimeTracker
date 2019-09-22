@@ -38,7 +38,7 @@ class TrackTime:
         pid = win32process.GetWindowThreadProcessId(fore_win_id) #This produces a list of PIDs active window relates to
         try:
             app_name = psutil.Process(pid[-1]).name().split('.exe')[0].title()
-            print(f'App name: {app_name}')
+            logging.warning(f'App name: {app_name}')
             if app_name in self.titles:
                 return app_name
         except psutil._exceptions.NoSuchProcess:
@@ -65,7 +65,7 @@ class TrackTime:
 
     def start_recording(self):
         self.data_dict = self.get_data_dict()
-        print('Recording')
+        logging.warning('Recording')
         self.stop_btn.pack(side='left')
         self.start_btn['state']='disabled'
         self.stop_btn['state']='normal'
@@ -91,23 +91,23 @@ class TrackTime:
         
         if self.recording:
             newApp = self.active_window_process_name()
-            print(newApp)
+            logging.warning(newApp)
             if newApp==currentApp:
                 totalTime+=1
-                print(f'In if: {totalTime}')
+                logging.warning(f'In if: {totalTime}')
             else:
                 self.add(currentApp, totalTime)
                 currentApp=newApp
                 logging.warning(f'Current app: {currentApp}')
                 totalTime=0
                 totalTime+=1
-                print(f'In else: {totalTime}')
+                logging.warning(f'In else: {totalTime}')
 
         self.root.after(1000, self.record, currentApp, totalTime)
 
     def save_data(self):
         data = json.dumps(self.data_dict)
-        print(data)
+        logging.warning(data)
         with open('data.json','w+') as file:
             file.write(data)
 
@@ -118,8 +118,8 @@ class TrackTime:
                 del self.data_dict[process]
         labels = list(self.data_dict.keys())
         val = list(self.data_dict.values())
-        print(labels)
-        print(val)
+        logging.warning(labels)
+        logging.warning(val)
         plotter.pie(val, labels=labels, autopct='%1.2f', startangle=90)
         plotter.legend()
         plotter.show()
@@ -129,5 +129,5 @@ class TrackTime:
 try:
     tracker = TrackTime()
 except Exception as e:
-    print(e)
+    logging.warning(e)
     
