@@ -1,0 +1,2 @@
+matplotlib
+win32gui
