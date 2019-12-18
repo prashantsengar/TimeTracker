@@ -1,0 +1,4 @@
+matplotlib
+win32gui
+sqlite3
+datetime
