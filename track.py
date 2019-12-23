@@ -2,7 +2,8 @@ import tkinter as tk
 import win32gui
 import psutil 
 import win32process
-import matplotlib.pyplot as plotter
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg as fcta
+import matplotlib.pyplot as plt
 from pathlib import Path
 import json
 import configparser as cp
@@ -18,8 +19,7 @@ class TrackTime:
         config.read('conf.ini')
         DEF = config['DEFAULT']
         self.titles = DEF['titles'].split(',')
-        self.ignore_processes = DEF['ignore'].split(',')
-        
+        self.ignore_processes = DEF['ignore'].split(',')        
         self.root = tk.Tk()
         self.root.title('TimeTracker')
         self.frame = tk.Frame(self.root)
@@ -74,7 +74,7 @@ class TrackTime:
     def start_recording(self):
         self.data_dict = self.get_data_dict()
         logging.warning('Recording')
-        self.stop_btn.pack(side='left')
+        self.stop_btn.pack(side='left')             
         self.start_btn['state']='disabled'
         self.stop_btn['state']='normal'
         self.recording=True
@@ -111,7 +111,7 @@ class TrackTime:
                 totalTime+=1
                 logging.warning(f'In else: {totalTime}')
 
-        self.root.after(1000, self.record, currentApp, totalTime)
+            self.root.after(1000, self.record, currentApp, totalTime)
 
     def save_data(self):
         data = json.dumps(self.data_dict)
@@ -130,9 +130,19 @@ class TrackTime:
         val = list(self.data_dict.values())
         logging.warning(labels)
         logging.warning(val)
-        plotter.pie(val, labels=labels, autopct='%1.2f', startangle=90)
-        plotter.legend()
-        plotter.show()
+        try:#To clear any previous figure (overwrite)
+            self.widget.destroy()
+            logging.warning('Cleared previous figure')            
+        except Exception as e:#if no figure initially(self.widget isn't defined yet)
+            logging.warning(e)
+        self.figure = plt.Figure()
+        subplot = self.figure.add_subplot()
+        subplot.title.set_text("Report:")
+        subplot.pie(val,labels=labels,autopct='%1.2f',startangle=90)
+        piechart = fcta(self.figure, self.root) 
+        self.widget=piechart.get_tk_widget()
+        self.widget.pack(side='left',fill='both')
+        
     def save_datanew(self):
         cursor=db.cursor()
         try:
@@ -180,9 +190,18 @@ class TrackTime:
                     val[i]+=k
         logging.warning(labels)
         logging.warning(val)
-        plotter.pie(val, labels=labels, autopct='%1.2f', startangle=90)
-        plotter.legend()
-        plotter.show()
+        try:#To clear any previous figure (overwrite)
+            self.widget.destroy()
+            logging.warning('Cleared previous figure')            
+        except Exception as e:#if no figure initially(self.widget isn't defined yet)
+            logging.warning(e)
+        self.figure = plt.Figure()
+        subplot = self.figure.add_subplot()
+        subplot.title.set_text("Month Report:")
+        subplot.pie(val,labels=labels,autopct='%1.2f',startangle=90)
+        piechart = fcta(self.figure, self.root)
+        self.widget=piechart.get_tk_widget()
+        self.widget.pack(side='left',fill='both')
     def week_report(self):
         cursor=db.cursor()
         cursor.execute('''select name,time from info where date between date('now','weekday 1', '-21 days') and date('now')''')
@@ -201,9 +220,18 @@ class TrackTime:
                     val[i]+=k
         logging.warning(labels)
         logging.warning(val)
-        plotter.pie(val, labels=labels, autopct='%1.2f', startangle=90)
-        plotter.legend()
-        plotter.show()
+        try:#To clear any previous figure (overwrite)
+            self.widget.destroy()
+            logging.warning('Cleared previous figure')            
+        except Exception as e:#if no figure initially(self.widget isn't defined yet)
+            logging.warning(e)
+        self.figure = plt.Figure()
+        subplot = self.figure.add_subplot()
+        subplot.title.set_text("Week Report:")
+        subplot.pie(val,labels=labels,autopct='%1.2f',startangle=90)
+        piechart = fcta(self.figure, self.root)
+        self.widget=piechart.get_tk_widget()
+        self.widget.pack(side='left',fill='both')
 try:
     tracker = TrackTime()
 except Exception as e:
