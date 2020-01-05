@@ -49,8 +49,8 @@ class TrackTime:
             logging.warning(f'App name: {app_name}')
             if app_name in self.titles:
                 return app_name
-        except psutil._exceptions.NoSuchProcess:
-            logging.warning(psutil._exceptions.NoSuchProcess)
+        except psutil.NoSuchProcess:
+            logging.warning(psutil.NoSuchProcess)
         window_title = win32gui.GetWindowText(fore_win_id)
         logging.warning(f'Window title {window_title}')
         try:
