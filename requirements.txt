@@ -1,4 +1,3 @@
-matplotlib (version 3.1 or greater)
+matplotlib>3.1
 win32gui
 sqlite3
-datetime
