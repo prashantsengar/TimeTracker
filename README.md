@@ -1,6 +1,10 @@
 # TimeTracker
 Track your time, know where it goes
 
+- Join our Telegram group via the link given [below](#community)
+- Read about it on my [blog](https://prashants.in/blog/cleanpy-python-script-to-organize-your-files/)
+
+
 ## Clone repo
 `git clone https://github.com/prashantsengar/TimeTracker.git`
 
@@ -31,3 +35,10 @@ It shows a pie chart.
 ![An example of a report](https://i.imgur.com/1vH40Mv.png)
 
 *An example of a report*
+
+
+## Community 
+
+Join the Telegram group for support and contributing. If you want to contribute, joining the group helps us all a lot because you can get instant feedback.
+
+[<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" alt="mTracker Telegram Group" width="150" height="150">](https://t.me/joinchat/INDdLhbuC7hWgHqTyBplIw)
