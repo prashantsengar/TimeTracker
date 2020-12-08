@@ -39,6 +39,8 @@ It shows a pie chart.
 
 ## Community 
 
+Read the [contributing guide](./CONTRIBUTING.md)
+
 Join the Telegram group for support and contributing. If you want to contribute, joining the group helps us all a lot because you can get instant feedback.
 
 [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1024px-Telegram_logo.svg.png" alt="mTracker Telegram Group" width="150" height="150">](https://t.me/joinchat/INDdLhbuC7hWgHqTyBplIw)
